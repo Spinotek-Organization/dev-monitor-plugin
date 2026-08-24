@@ -1,0 +1,34 @@
+[
+    {
+        "version": "v1.1.0",
+        "date": "2026-08-24",
+        "author": "Antigravity AI Agent",
+        "type": "feature",
+        "changes": [
+            "Menambahkan modul Version Log berbasis JSON",
+            "Menyediakan endpoint API untuk auto-logging oleh AI Agent",
+            "Integrasi workflow auto-tagging GitHub Actions"
+        ]
+    },
+    {
+        "version": "v1.0.1",
+        "date": "2026-08-20",
+        "author": "Dev Spinotek",
+        "type": "improvement",
+        "changes": [
+            "Penyempurnaan validasi form create & edit task",
+            "Perbaikan styling responsive pada antarmuka tabel task"
+        ]
+    },
+    {
+        "version": "v1.0.0",
+        "date": "2026-08-15",
+        "author": "Dev Spinotek & AI",
+        "type": "release",
+        "changes": [
+            "Inisialisasi package spinotek/task-monitoring",
+            "Fitur CRUD task monitoring dengan status & priority",
+            "Integrasi service provider & auto-discovery Laravel"
+        ]
+    }
+]
