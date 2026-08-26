@@ -14,10 +14,22 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#0066FF',
+                            600: '#0265DC',
+                            700: '#0052cc',
+                            800: '#0041a8',
+                            900: '#003380',
+                        },
+                        cyanbrand: {
+                            50: '#ecfeff',
+                            100: '#cffafe',
+                            400: '#22d3ee',
+                            500: '#00b4d8',
                         }
                     }
                 }
@@ -66,15 +78,15 @@
             <div v-for="toast in toasts" :key="toast.id"
                  class="pointer-events-auto bg-white rounded-2xl p-4 shadow-xl border flex items-start gap-3 transform transition-all duration-300 animate-toast-in"
                  :class="{
-                     'border-emerald-100 ring-1 ring-emerald-500/10': toast.type === 'success',
+                     'border-blue-100 ring-1 ring-blue-500/10': toast.type === 'success',
                      'border-rose-100 ring-1 ring-rose-500/10': toast.type === 'error',
-                     'border-blue-100 ring-1 ring-blue-500/10': toast.type === 'info'
+                     'border-slate-200 ring-1 ring-slate-400/10': toast.type === 'info'
                  }">
                 <div class="p-2.5 rounded-xl flex-shrink-0"
                      :class="{
-                         'bg-emerald-50 text-emerald-600': toast.type === 'success',
+                         'bg-blue-50 text-blue-600': toast.type === 'success',
                          'bg-rose-50 text-rose-600': toast.type === 'error',
-                         'bg-blue-50 text-blue-600': toast.type === 'info'
+                         'bg-slate-100 text-slate-600': toast.type === 'info'
                      }">
                     <!-- Success SVG -->
                     <svg v-if="toast.type === 'success'" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
@@ -102,18 +114,22 @@
         </div>
 
         <!-- Navbar -->
-        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-200 flex-shrink-0">
-                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        <!-- Official Spinotek Brand Logo -->
+                        <div class="w-10 h-10 rounded-xl bg-white border border-slate-200/80 p-1.5 flex items-center justify-center shadow-xs flex-shrink-0">
+                            <svg class="w-full h-full" viewBox="0 0 380 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M45.5 0C20.37 0 0 20.37 0 45.5C0 57.5 4.8 68.3 12.6 76.1L12.7 76.2L12.8 76.3C20.6 84.1 31.4 88.9 43.4 88.9C45.3 88.9 47.1 88.7 49 88.5L108.6 158.4L29 237.9C10.7 256.2 0 280.9 0 307.2C0 314.1 1.2 320 3.6 320H170.8C189.1 320 206.5 312.8 219.5 299.8L351.4 167.9C369.7 149.6 380 124.9 380 98.6C380 44.1 335.9 0 281.4 0H45.5Z" fill="#00b4d8" />
+                                <path d="M45.5 0C20.37 0 0 20.37 0 45.5C0 57.5 4.8 68.3 12.6 76.1L108.6 172.1L275.5 5.2C277.5 3.2 279.4 1.5 281.4 0H45.5Z" fill="#38bdf8" />
+                                <path d="M281.4 0C255.1 0 230.4 10.3 212.1 28.6L29 211.7C10.7 230 0 254.7 0 281C0 302.6 10.7 320 28 320H150L351.4 118.6C369.7 100.3 380 75.6 380 49.3C380 22.1 357.9 0 330.7 0H281.4Z" fill="#0066FF" />
                             </svg>
                         </div>
                         <div>
-                            <button @click="switchTab('tasks')" class="font-bold text-lg text-slate-800 tracking-tight hover:text-emerald-600 transition flex items-center gap-1.5 cursor-pointer">
-                                Spinotek <span class="text-emerald-700 font-semibold text-xs px-2 py-0.5 bg-emerald-50 rounded-md border border-emerald-200">Monitoring</span>
+                            <button @click="switchTab('tasks')" class="font-bold text-lg text-slate-800 tracking-tight hover:text-blue-600 transition flex items-center gap-2 cursor-pointer">
+                                <span>Spinotek</span>
+                                <span class="text-blue-700 font-semibold text-xs px-2 py-0.5 bg-blue-50 rounded-md border border-blue-200">Dev Monitor</span>
                             </button>
                         </div>
                     </div>
@@ -122,7 +138,7 @@
                     <nav class="flex items-center space-x-2">
                         <button @click="switchTab('tasks')"
                                 class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer"
-                                :class="activeTab === 'tasks' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
+                                :class="activeTab === 'tasks' ? 'bg-blue-50 text-blue-700 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
@@ -130,7 +146,7 @@
                         </button>
                         <button @click="switchTab('version-logs')"
                                 class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer"
-                                :class="activeTab === 'version-logs' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
+                                :class="activeTab === 'version-logs' ? 'bg-blue-50 text-blue-700 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.386l5.06-2.981c.827-.486 1.055-1.547.494-2.296L11.16 4.591A2.25 2.25 0 009.568 3z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
@@ -154,7 +170,7 @@
                             <p class="text-sm text-slate-500 mt-1">Pantau progres pengerjaan task, status pengerjaan, dan prioritas tugas secara realtime.</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button type="button" @click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-sm shadow-emerald-200 transition cursor-pointer">
+                            <button type="button" @click="openCreateModal" class="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow-sm shadow-blue-200 transition cursor-pointer">
                                 <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
@@ -166,7 +182,7 @@
                     <!-- Stats Cards -->
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <!-- Total Task -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Task</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -179,7 +195,7 @@
                         </div>
 
                         <!-- Pending -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Pending</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -192,7 +208,7 @@
                         </div>
 
                         <!-- In Progress -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">In Progress</span>
                                 <span class="p-2 bg-amber-50 text-amber-600 rounded-xl">
@@ -205,21 +221,21 @@
                         </div>
 
                         <!-- Completed -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Completed</span>
-                                <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
+                                <span class="p-2 bg-blue-50 text-blue-600 rounded-xl">
                                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </span>
                             </div>
-                            <p class="text-3xl font-extrabold text-emerald-600 mt-2">@{{ computedStats.completed }}</p>
+                            <p class="text-3xl font-extrabold text-blue-600 mt-2">@{{ computedStats.completed }}</p>
                         </div>
                     </div>
 
                     <!-- Filters & Search (Instant Reactive) -->
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
                             <!-- Search -->
                             <div class="relative">
@@ -228,12 +244,12 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                                     </svg>
                                 </div>
-                                <input type="text" v-model="searchQuery" placeholder="Cari judul / assignee..." class="w-full text-sm rounded-xl border border-slate-300 pl-10 pr-3.5 py-2.5 h-11 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
+                                <input type="text" v-model="searchQuery" placeholder="Cari judul / assignee..." class="w-full text-sm rounded-xl border border-slate-300 pl-10 pr-3.5 py-2.5 h-11 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
                             </div>
 
                             <!-- Status Select -->
                             <div>
-                                <select v-model="filterStatus" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 h-11 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition bg-white cursor-pointer">
+                                <select v-model="filterStatus" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 h-11 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white cursor-pointer">
                                     <option value="">Semua Status</option>
                                     <option value="pending">Pending</option>
                                     <option value="in_progress">In Progress</option>
@@ -243,7 +259,7 @@
 
                             <!-- Priority Select -->
                             <div>
-                                <select v-model="filterPriority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 h-11 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition bg-white cursor-pointer">
+                                <select v-model="filterPriority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 h-11 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white cursor-pointer">
                                     <option value="">Semua Prioritas</option>
                                     <option value="low">Low</option>
                                     <option value="medium">Medium</option>
@@ -267,7 +283,7 @@
                     </div>
 
                     <!-- Tasks Table -->
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-sm text-slate-700">
                                 <thead class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-500 tracking-wider">
@@ -288,7 +304,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             <select :value="task.status" @change="updateTaskStatus(task, $event.target.value)"
-                                                    class="text-xs font-semibold rounded-lg px-2.5 py-1.5 border cursor-pointer focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                                                    class="text-xs font-semibold rounded-lg px-2.5 py-1.5 border cursor-pointer focus:ring-2 focus:ring-blue-500 outline-none transition"
                                                     :class="getStatusBadgeClass(task.status)">
                                                 <option value="pending">Pending</option>
                                                 <option value="in_progress">In Progress</option>
@@ -302,7 +318,7 @@
                                         </td>
                                         <td class="px-6 py-4 text-xs sm:text-sm font-medium text-slate-700">
                                             <span v-if="task.assigned_to" class="inline-flex items-center gap-2">
-                                                <span class="w-6 h-6 rounded-full bg-slate-200 text-[11px] font-bold flex items-center justify-center text-slate-700 flex-shrink-0">
+                                                <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-[11px] font-bold flex items-center justify-center flex-shrink-0">
                                                     @{{ task.assigned_to.charAt(0).toUpperCase() }}
                                                 </span>
                                                 <span>@{{ task.assigned_to }}</span>
@@ -316,7 +332,7 @@
                                             <div class="inline-flex items-center justify-center gap-1.5">
                                                 <!-- Edit Button -->
                                                 <button type="button" @click="openEditModal(task)"
-                                                        class="w-8 h-8 rounded-lg text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 transition border border-slate-200 hover:border-emerald-300 flex items-center justify-center cursor-pointer" 
+                                                        class="w-8 h-8 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-blue-50 transition border border-slate-200 hover:border-blue-300 flex items-center justify-center cursor-pointer" 
                                                         title="Edit Task">
                                                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -358,15 +374,15 @@
                         <div>
                             <div class="flex items-center gap-3">
                                 <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Version Logs</h1>
-                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                                     Latest: @{{ latestVersionComputed }}
                                 </span>
                             </div>
                             <p class="text-sm sm:text-base text-slate-500 mt-1">Riwayat changelog & rilis versi aplikasi (disimpan dalam format file-based JSON).</p>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button type="button" @click="openAddVersionModal" class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-xl shadow-sm shadow-emerald-200 transition cursor-pointer">
+                            <button type="button" @click="openAddVersionModal" class="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow-sm shadow-blue-200 transition cursor-pointer">
                                 <svg class="w-4 h-4 flex-shrink-0" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
@@ -378,7 +394,7 @@
                     <!-- Summary Stats Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <!-- Total Rilis -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Versi</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -392,23 +408,23 @@
                         </div>
 
                         <!-- Versi Terbaru -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Versi Terbaru</span>
-                                <span class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
+                                <span class="p-2 bg-blue-50 text-blue-600 rounded-xl">
                                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </span>
                             </div>
-                            <p class="text-3xl font-extrabold text-emerald-600 mt-2 font-mono">@{{ latestVersionComputed }}</p>
+                            <p class="text-3xl font-extrabold text-blue-600 mt-2 font-mono">@{{ latestVersionComputed }}</p>
                         </div>
 
                         <!-- Terakhir Diperbarui -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Terakhir Dirilis</span>
-                                <span class="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                                <span class="p-2 bg-sky-50 text-sky-600 rounded-xl">
                                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.253M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                                     </svg>
@@ -423,10 +439,10 @@
                         <div v-for="(log, index) in versionLogs" :key="index" class="relative pl-6 sm:pl-8">
                             <!-- Dot icon -->
                             <div class="absolute -left-[9px] top-4 w-4 h-4 rounded-full bg-white border-4"
-                                 :class="index === 0 ? 'border-emerald-500 ring-4 ring-emerald-100' : 'border-slate-400'"></div>
+                                 :class="index === 0 ? 'border-blue-600 ring-4 ring-blue-100' : 'border-slate-400'"></div>
 
                             <!-- Version Card -->
-                            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:shadow-md transition">
+                            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 sm:p-6 hover:shadow-md transition">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
                                     <div class="flex items-center gap-3">
                                         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 font-mono tracking-tight">@{{ log.version }}</h2>
@@ -456,7 +472,7 @@
                                     <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Daftar Perubahan (Changelog):</h4>
                                     <ul class="space-y-2">
                                         <li v-for="(change, cIndex) in (Array.isArray(log.changes) ? log.changes : [log.changes])" :key="cIndex" class="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
-                                            <span class="p-0.5 bg-emerald-50 text-emerald-600 rounded border border-emerald-200 mt-1 flex-shrink-0 flex items-center justify-center">
+                                            <span class="p-0.5 bg-blue-50 text-blue-600 rounded border border-blue-200 mt-1 flex-shrink-0 flex items-center justify-center">
                                                 <svg class="w-3.5 h-3.5" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                                                 </svg>
@@ -493,18 +509,18 @@
                 <form @submit.prevent="submitCreateTask" class="mt-4 space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Judul Task *</label>
-                        <input type="text" v-model="newTask.title" required placeholder="Contoh: Implementasi modul autentikasi..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                        <input type="text" v-model="newTask.title" required placeholder="Contoh: Implementasi modul autentikasi..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Deskripsi</label>
-                        <textarea v-model="newTask.description" rows="3" placeholder="Rincian task atau checklist..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"></textarea>
+                        <textarea v-model="newTask.description" rows="3" placeholder="Rincian task atau checklist..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Status *</label>
-                            <select v-model="newTask.status" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white">
+                            <select v-model="newTask.status" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white">
                                 <option value="pending">Pending</option>
                                 <option value="in_progress">In Progress</option>
                                 <option value="completed">Completed</option>
@@ -512,7 +528,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Prioritas *</label>
-                            <select v-model="newTask.priority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white">
+                            <select v-model="newTask.priority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white">
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
@@ -522,14 +538,14 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Assigned To</label>
-                        <input type="text" v-model="newTask.assigned_to" placeholder="Nama developer / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                        <input type="text" v-model="newTask.assigned_to" placeholder="Nama developer / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
                         <button type="button" @click="showCreateModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
                             <span v-if="isSubmitting">Menyimpan...</span>
                             <span v-else>Simpan Task</span>
                         </button>
@@ -549,18 +565,18 @@
                 <form @submit.prevent="submitUpdateTask" class="mt-4 space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Judul Task *</label>
-                        <input type="text" v-model="editingTask.title" required placeholder="Contoh: Implementasi modul autentikasi..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                        <input type="text" v-model="editingTask.title" required placeholder="Contoh: Implementasi modul autentikasi..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Deskripsi</label>
-                        <textarea v-model="editingTask.description" rows="3" placeholder="Rincian task atau checklist..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none"></textarea>
+                        <textarea v-model="editingTask.description" rows="3" placeholder="Rincian task atau checklist..." class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Status *</label>
-                            <select v-model="editingTask.status" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white">
+                            <select v-model="editingTask.status" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white">
                                 <option value="pending">Pending</option>
                                 <option value="in_progress">In Progress</option>
                                 <option value="completed">Completed</option>
@@ -568,7 +584,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Prioritas *</label>
-                            <select v-model="editingTask.priority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white">
+                            <select v-model="editingTask.priority" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white">
                                 <option value="low">Low</option>
                                 <option value="medium">Medium</option>
                                 <option value="high">High</option>
@@ -578,14 +594,14 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Assigned To</label>
-                        <input type="text" v-model="editingTask.assigned_to" placeholder="Nama developer / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                        <input type="text" v-model="editingTask.assigned_to" placeholder="Nama developer / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
                         <button type="button" @click="showEditModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
@@ -639,22 +655,22 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nomor Versi *</label>
-                            <input type="text" v-model="newVersion.version" required placeholder="v1.2.0" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                            <input type="text" v-model="newVersion.version" required placeholder="v1.2.0" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tanggal</label>
-                            <input type="date" v-model="newVersion.date" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                            <input type="date" v-model="newVersion.date" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Author / Pembuat</label>
-                            <input type="text" v-model="newVersion.author" placeholder="Nama Dev / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                            <input type="text" v-model="newVersion.author" placeholder="Nama Dev / AI Agent" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tipe Rilis</label>
-                            <select v-model="newVersion.type" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white">
+                            <select v-model="newVersion.type" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white">
                                 <option value="feature">Feature</option>
                                 <option value="improvement">Improvement</option>
                                 <option value="fix">Bug Fix</option>
@@ -665,14 +681,14 @@
 
                     <div>
                         <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Rincian Perubahan (1 baris per item) *</label>
-                        <textarea v-model="newVersion.changesText" required rows="4" placeholder="Menambahkan fitur X&#10;Perbaikan bug Y&#10;Optimasi performa Z" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none font-sans"></textarea>
+                        <textarea v-model="newVersion.changesText" required rows="4" placeholder="Menambahkan fitur X&#10;Perbaikan bug Y&#10;Optimasi performa Z" class="w-full text-sm rounded-xl border border-slate-300 px-3.5 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none font-sans"></textarea>
                     </div>
 
                     <div class="flex justify-end gap-3 pt-4 border-t border-slate-100">
                         <button type="button" @click="showAddVersionModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
                             <svg class="w-4 h-4 flex-shrink-0" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
@@ -686,7 +702,9 @@
 
         <!-- Footer -->
         <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
-            <p>&copy; {{ date('Y') }} Spinotek Dev Monitor Plugin. Built with Vue 3 & Laravel.</p>
+            <div class="flex items-center justify-center gap-2">
+                <span>&copy; {{ date('Y') }} Spinotek Dev Monitor. All rights reserved.</span>
+            </div>
         </footer>
     </div>
 
@@ -820,7 +838,7 @@
                 const getStatusBadgeClass = (status) => {
                     switch(status) {
                         case 'completed':
-                            return 'bg-emerald-50 text-emerald-700 border-emerald-300';
+                            return 'bg-blue-50 text-blue-700 border-blue-300';
                         case 'in_progress':
                             return 'bg-amber-50 text-amber-700 border-amber-300';
                         default:
@@ -842,13 +860,13 @@
                 const getVersionTypeBadgeClass = (type) => {
                     switch((type || '').toLowerCase()) {
                         case 'release':
-                            return 'bg-purple-50 text-purple-700 border-purple-200';
+                            return 'bg-indigo-50 text-indigo-700 border-indigo-200';
                         case 'fix':
                             return 'bg-rose-50 text-rose-700 border-rose-200';
                         case 'improvement':
                             return 'bg-amber-50 text-amber-700 border-amber-200';
                         default:
-                            return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                            return 'bg-blue-50 text-blue-700 border-blue-200';
                     }
                 };
 
