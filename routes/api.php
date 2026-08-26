@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Spinotek\TaskMonitoring\Http\Controllers\TaskMonitoringController;
 use Spinotek\TaskMonitoring\Http\Controllers\VersionLogController;
 
-Route::middleware('api')->prefix('api/monitoring')->name('api.task-monitoring.')->group(function () {
+Route::middleware('api')->prefix('api/spinotek/ticket')->name('api.spinotek.ticket.')->group(function () {
     // Tasks API
     Route::get('tasks', [TaskMonitoringController::class, 'apiIndex'])->name('tasks.index');
     Route::post('tasks', [TaskMonitoringController::class, 'apiStore'])->name('tasks.store');

@@ -117,10 +117,10 @@ Setelah instalasi dan server dijalankan (`php artisan serve`):
 
 | Halaman / Fitur | URL | Deskripsi |
 | :--- | :--- | :--- |
-| **Dashboard (SPA)** | `http://localhost:8000/monitoring/tasks` | Tampilan SPA Vue 3 untuk Task Monitoring |
-| **Version Logs (SPA)** | `http://localhost:8000/monitoring/version-logs` | Tampilan SPA Vue 3 untuk Version Changelog |
-| **API Tasks** | `GET /api/monitoring/tasks` | Mengambil data tasks & stats realtime |
-| **API Version Logs** | `GET /api/monitoring/version-logs` | Mengambil riwayat versi JSON |
+| **Dashboard (SPA)** | `http://localhost:8000/spinotek/ticket/tasks` | Tampilan SPA Vue 3 untuk Task Monitoring |
+| **Version Logs (SPA)** | `http://localhost:8000/spinotek/ticket/version-logs` | Tampilan SPA Vue 3 untuk Version Changelog |
+| **API Tasks** | `GET /api/spinotek/ticket/tasks` | Mengambil data tasks & stats realtime |
+| **API Version Logs** | `GET /api/spinotek/ticket/version-logs` | Mengambil riwayat versi JSON |
 
 ---
 
@@ -129,7 +129,7 @@ Setelah instalasi dan server dijalankan (`php artisan serve`):
 AI Agent atau CI script dapat menambahkan catatan changelog secara otomatis melalui HTTP POST:
 
 ```bash
-curl -X POST http://localhost:8000/api/monitoring/version-logs \
+curl -X POST http://localhost:8000/api/spinotek/ticket/version-logs \
   -H "Content-Type: application/json" \
   -d '{
     "version": "v1.2.0",

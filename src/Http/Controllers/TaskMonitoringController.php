@@ -14,7 +14,7 @@ class TaskMonitoringController extends Controller
      */
     public function dashboard(Request $request)
     {
-        $activeTab = $request->is('monitoring/version-logs') ? 'version-logs' : 'tasks';
+        $activeTab = $request->is('*version-logs*') ? 'version-logs' : 'tasks';
 
         $tasks = MonitoringTask::latest()->get();
         $stats = [

@@ -114,7 +114,7 @@
                 <div class="flex justify-between h-16 items-center">
                     <div class="flex items-center space-x-3.5">
                         <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center p-1.5 shadow-sm flex-shrink-0">
-                            <img src="{{ route('task-monitoring.logo') }}" alt="Spinotek Logo" class="w-full h-full object-contain">
+                            <img src="{{ route('spinotek.ticket.logo') }}" alt="Spinotek Logo" class="w-full h-full object-contain">
                         </div>
                         <div>
                             <button @click="switchTab('tasks')" class="font-bold text-lg text-slate-900 tracking-tight hover:text-blue-600 transition flex items-center gap-2 cursor-pointer">
@@ -704,7 +704,7 @@
         <!-- Footer -->
         <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
             <div class="flex items-center justify-center gap-2">
-                <img src="{{ route('task-monitoring.logo') }}" alt="Spinotek Logo" class="w-4 h-4 object-contain">
+                <img src="{{ route('spinotek.ticket.logo') }}" alt="Spinotek Logo" class="w-4 h-4 object-contain">
                 <p>&copy; {{ date('Y') }} Spinotek Dev Monitor Plugin. All rights reserved.</p>
             </div>
         </footer>
@@ -787,7 +787,7 @@
                 // Navigation Switcher without reload
                 const switchTab = (tab) => {
                     activeTab.value = tab;
-                    const url = tab === 'version-logs' ? '/monitoring/version-logs' : '/monitoring/tasks';
+                    const url = tab === 'version-logs' ? '/spinotek/ticket/version-logs' : '/spinotek/ticket/tasks';
                     window.history.pushState({ tab }, '', url);
                 };
 
@@ -899,7 +899,7 @@
                 const submitCreateTask = async () => {
                     isSubmitting.value = true;
                     try {
-                        const response = await fetch('/api/monitoring/tasks', {
+                        const response = await fetch('/api/spinotek/ticket/tasks', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -933,7 +933,7 @@
                 const submitUpdateTask = async () => {
                     isSubmitting.value = true;
                     try {
-                        const response = await fetch(`/api/monitoring/tasks/${editingTask.value.id}`, {
+                        const response = await fetch(`/api/spinotek/ticket/tasks/${editingTask.value.id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -967,7 +967,7 @@
                     task.status = newStatus;
 
                     try {
-                        const response = await fetch(`/api/monitoring/tasks/${task.id}/status`, {
+                        const response = await fetch(`/api/spinotek/ticket/tasks/${task.id}/status`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -1001,7 +1001,7 @@
                     isSubmitting.value = true;
 
                     try {
-                        const response = await fetch(`/api/monitoring/tasks/${deletingTask.value.id}`, {
+                        const response = await fetch(`/api/spinotek/ticket/tasks/${deletingTask.value.id}`, {
                             method: 'DELETE',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -1053,7 +1053,7 @@
                             changes: changes
                         };
 
-                        const response = await fetch('/api/monitoring/version-logs', {
+                        const response = await fetch('/api/spinotek/ticket/version-logs', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
