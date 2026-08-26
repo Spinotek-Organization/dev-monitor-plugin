@@ -5,13 +5,35 @@ namespace Spinotek\TaskMonitoring\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Spinotek\TaskMonitoring\Models\MonitoringTask;
+use Spinotek\TaskMonitoring\Services\VersionLogService;
 
 class TaskMonitoringController extends Controller
 {
     /**
-     * Display a listing of the tasks.
+     * Display the Vue SPA dashboard view.
      */
-    public function index(Request $request)
+    public function dashboard(Request $request)
+    {
+        $activeTab = $request->is('monitoring/version-logs') ? 'version-logs' : 'tasks';
+
+        $tasks = MonitoringTask::latest()->get();
+        $stats = [
+            'total' => $tasks->count(),
+            'pending' => $tasks->where('status', 'pending')->count(),
+            'in_progress' => $tasks->where('status', 'in_progress')->count(),
+            'completed' => $tasks->where('status', 'completed')->count(),
+        ];
+
+        $logs = VersionLogService::getLogs();
+        $latestVersion = !empty($logs) ? ($logs[0]['version'] ?? 'v0.0.0') : 'v0.0.0';
+
+        return view('task-monitoring::app', compact('tasks', 'stats', 'logs', 'latestVersion', 'activeTab'));
+    }
+
+    /**
+     * Get tasks listing with stats via API.
+     */
+    public function apiIndex(Request $request)
     {
         $query = MonitoringTask::query()->latest();
 
@@ -30,30 +52,27 @@ class TaskMonitoringController extends Controller
             });
         }
 
-        $tasks = $query->paginate(15)->withQueryString();
-
+        $allTasks = MonitoringTask::all();
         $stats = [
-            'total' => MonitoringTask::count(),
-            'pending' => MonitoringTask::where('status', 'pending')->count(),
-            'in_progress' => MonitoringTask::where('status', 'in_progress')->count(),
-            'completed' => MonitoringTask::where('status', 'completed')->count(),
+            'total' => $allTasks->count(),
+            'pending' => $allTasks->where('status', 'pending')->count(),
+            'in_progress' => $allTasks->where('status', 'in_progress')->count(),
+            'completed' => $allTasks->where('status', 'completed')->count(),
         ];
 
-        return view('task-monitoring::tasks.index', compact('tasks', 'stats'));
+        $tasks = $query->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $tasks,
+            'stats' => $stats,
+        ]);
     }
 
     /**
-     * Show the form for creating a new task.
+     * Store a newly created task via API.
      */
-    public function create()
-    {
-        return view('task-monitoring::tasks.create');
-    }
-
-    /**
-     * Store a newly created task in storage.
-     */
-    public function store(Request $request)
+    public function apiStore(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -63,24 +82,19 @@ class TaskMonitoringController extends Controller
             'assigned_to' => 'nullable|string|max:255',
         ]);
 
-        MonitoringTask::create($validated);
+        $task = MonitoringTask::create($validated);
 
-        return redirect()->route('task-monitoring.tasks.index')
-            ->with('success', 'Task berhasil ditambahkan!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Task berhasil ditambahkan!',
+            'data' => $task,
+        ], 201);
     }
 
     /**
-     * Show the form for editing the specified task.
+     * Update the specified task via API.
      */
-    public function edit(MonitoringTask $task)
-    {
-        return view('task-monitoring::tasks.edit', compact('task'));
-    }
-
-    /**
-     * Update the specified task in storage.
-     */
-    public function update(Request $request, MonitoringTask $task)
+    public function apiUpdate(Request $request, MonitoringTask $task)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -92,14 +106,17 @@ class TaskMonitoringController extends Controller
 
         $task->update($validated);
 
-        return redirect()->route('task-monitoring.tasks.index')
-            ->with('success', 'Task berhasil diperbarui!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Task berhasil diperbarui!',
+            'data' => $task,
+        ]);
     }
 
     /**
-     * Quick update status for a task.
+     * Quick update status for a task via API.
      */
-    public function updateStatus(Request $request, MonitoringTask $task)
+    public function apiUpdateStatus(Request $request, MonitoringTask $task)
     {
         $validated = $request->validate([
             'status' => 'required|in:pending,in_progress,completed',
@@ -107,25 +124,23 @@ class TaskMonitoringController extends Controller
 
         $task->update($validated);
 
-        if ($request->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Status task berhasil diperbarui.',
-                'task' => $task,
-            ]);
-        }
-
-        return back()->with('success', 'Status task berhasil diperbarui!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Status task berhasil diperbarui.',
+            'task' => $task,
+        ]);
     }
 
     /**
-     * Remove the specified task from storage.
+     * Remove the specified task via API.
      */
-    public function destroy(MonitoringTask $task)
+    public function apiDestroy(MonitoringTask $task)
     {
         $task->delete();
 
-        return redirect()->route('task-monitoring.tasks.index')
-            ->with('success', 'Task berhasil dihapus!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Task berhasil dihapus!',
+        ]);
     }
 }

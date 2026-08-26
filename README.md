@@ -1,19 +1,24 @@
-# ⚡ Spinotek Dev Monitor Plugin for Laravel
+# ⚡ Spinotek Dev Monitor Plugin for Laravel (Vue 3 SPA Edition)
 
 <p align="center">
-  <strong>Plugin mandiri untuk Laravel: Pemantauan Task Development & Pencatatan Riwayat Versi (Changelog JSON) dengan integrasi Auto-Tagging GitHub Actions.</strong>
+  <strong>Plugin mandiri untuk Laravel berbasis Vue 3 Single Page Application (SPA): Pemantauan Task Development & Pencatatan Riwayat Versi (Changelog JSON) yang super responsif tanpa reload halaman, dilengkapi integrasi Auto-Tagging GitHub Actions.</strong>
 </p>
 
 ---
 
-## 🚀 Fitur Utama
+## 🚀 Fitur Unggulan
 
-- 📋 **CRUD Task Monitoring**: Pantau progres pengerjaan task, prioritas (*High, Medium, Low*), dan status (*Pending, In Progress, Completed*) secara interaktif.
-- ✏️ **Modal-based Edit & Custom Delete**: Edit data task dan konfirmasi hapus langsung menggunakan dialog modal tanpa reload halaman.
+- ⚡ **Vue 3 SPA (Single Page Application)**: Navigasi antar halaman (*Task Monitoring* ↔ *Version Logs*) berjalan instan tanpa refresh/reload halaman sama sekali.
+- 📋 **CRUD Task Monitoring Interaktif**:
+  - Filter pencarian, status, dan prioritas bekerja secara realtime (*instant filtering*).
+  - Penghitungan kartu metrik (*Total, Pending, In Progress, Completed*) terupdate secara otomatis dan reaktif.
+  - Pengubahan status inline langsung memicu background API sync + notifikasi toast.
+- ✏️ **Modal-based Form**: Form tambah task, edit task, hapus task (konfirmasi kustom), dan catat versi baru tampil dalam dialog modal yang cepat dan halus.
 - 🚀 **Version Logs (File-based JSON)**: Pencatatan riwayat rilis & changelog versi yang disimpan dalam format file `data/version_logs.json`.
-- 🤖 **AI Agent & CI API Endpoint**: Endpoint REST API untuk memungkinkan AI Agent (seperti Antigravity, Cursor) atau script CI/CD mencatat versi secara otomatis.
+- 🤖 **AI Agent & CI REST API**: Menyediakan endpoint API lengkap (`/api/monitoring/tasks` & `/api/monitoring/version-logs`) untuk memungkinkan AI Agent (seperti Antigravity, Cursor) atau script CI/CD berinteraksi secara otomatis.
 - 🔔 **Custom Toast Notifications**: Notifikasi mengambang (*floating toast*) modern dengan animasi mulus dan auto-dismiss.
 - 🏷️ **GitHub Actions Auto-Tag & Release**: Otomatis membuat Git Tag & GitHub Release resmi setiap kali ada commit/push ke branch `main`.
+- 📦 **Zero-Config Build**: Berjalan langsung secara mandiri tanpa memerlukan setup Vite/npm tambahan di proyek Laravel utama.
 
 ---
 
@@ -31,16 +36,10 @@ dev-monitor-plugin/
 │       └── 2026_08_24_000000_create_monitoring_tasks_table.php
 ├── resources/
 │   └── views/
-│       ├── layout.blade.php                         # Base Layout & Notification Engine
-│       ├── tasks/
-│       │   ├── index.blade.php                      # Dashboard Task, Filter, & Modals
-│       │   ├── create.blade.php
-│       │   └── edit.blade.php
-│       └── version-logs/
-│           └── index.blade.php                      # Timeline Changelog & Version Stats
+│       └── app.blade.php                            # Vue 3 SPA Dashboard & Components
 ├── routes/
-│   ├── api.php                                      # Endpoint API REST
-│   └── web.php                                      # Rute Antarmuka Web
+│   ├── api.php                                      # Endpoint API REST JSON
+│   └── web.php                                      # Rute Web SPA
 ├── src/
 │   ├── Http/
 │   │   └── Controllers/
@@ -60,8 +59,6 @@ dev-monitor-plugin/
 
 ## 📦 Panduan Instalasi ke Proyek Laravel
 
-Anda dapat menginstal plugin ini ke proyek Laravel menggunakan salah satu dari 2 metode di bawah ini:
-
 ### Opsi A: Instalasi via GitHub Repository (Remote Git)
 
 1. Tambahkan repository ke `composer.json` proyek Laravel Anda:
@@ -70,7 +67,7 @@ Anda dapat menginstal plugin ini ke proyek Laravel menggunakan salah satu dari 2
 "repositories": [
     {
         "type": "vcs",
-        "url": "git@github.com:Spinotek-Organization/dev-monitor-plugin.git"
+        "url": "https://github.com/Spinotek-Organization/dev-monitor-plugin.git"
     }
 ],
 "require": {
@@ -120,10 +117,10 @@ Setelah instalasi dan server dijalankan (`php artisan serve`):
 
 | Halaman / Fitur | URL | Deskripsi |
 | :--- | :--- | :--- |
-| **Task Monitoring** | `http://localhost:8000/monitoring/tasks` | Dashboard daftar task, metrik status, pencarian, filter, modal tambah & edit |
-| **Version Logs** | `http://localhost:8000/monitoring/version-logs` | Visualisasi timeline riwayat versi & modal catat rilis baru |
-| **API Get Logs** | `GET /api/monitoring/version-logs` | Mengambil seluruh log versi dalam format JSON |
-| **API Store Log** | `POST /api/monitoring/version-logs` | Endpoint untuk AI Agent mencatat log rilis baru |
+| **Dashboard (SPA)** | `http://localhost:8000/monitoring/tasks` | Tampilan SPA Vue 3 untuk Task Monitoring |
+| **Version Logs (SPA)** | `http://localhost:8000/monitoring/version-logs` | Tampilan SPA Vue 3 untuk Version Changelog |
+| **API Tasks** | `GET /api/monitoring/tasks` | Mengambil data tasks & stats realtime |
+| **API Version Logs** | `GET /api/monitoring/version-logs` | Mengambil riwayat versi JSON |
 
 ---
 
@@ -139,8 +136,8 @@ curl -X POST http://localhost:8000/api/monitoring/version-logs \
     "author": "Antigravity AI Agent",
     "type": "feature",
     "changes": [
-      "Menambahkan integrasi auto-release GitHub",
-      "Perbaikan tampilan modal responsif"
+      "Migrasi antarmuka view ke Vue 3 SPA",
+      "Navigasi instan tanpa refresh halaman"
     ]
   }'
 ```
@@ -156,8 +153,6 @@ Workflow telah terkonfigurasi di `.github/workflows/auto-tag.yml`.
   - `git commit -m "perbaikan bug task"` ➡️ Menghasilkan rilis **Patch** (`v1.0.0` ➡️ `v1.0.1`)
   - `git commit -m "fitur baru monitoring #minor"` ➡️ Menghasilkan rilis **Minor** (`v1.0.1` ➡️ `v1.1.0`)
   - `git commit -m "perubahan arsitektur besar #major"` ➡️ Menghasilkan rilis **Major** (`v1.1.0` ➡️ `v2.0.0`)
-
-> ⚠️ **Catatan Penting**: Pastikan pada repository GitHub Anda di menu **Settings** > **Actions** > **General** > **Workflow permissions**, Anda telah mengaktifkan opsi **"Read and write permissions"**.
 
 ---
 
