@@ -13,23 +13,18 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#0066FF',
-                            600: '#0265DC',
+                        spinotek: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            300: '#7cc5fb',
+                            400: '#38a8f8',
+                            500: '#0088ff',
+                            600: '#0066ff',
                             700: '#0052cc',
-                            800: '#0041a8',
-                            900: '#003380',
-                        },
-                        cyanbrand: {
-                            50: '#ecfeff',
-                            100: '#cffafe',
-                            400: '#22d3ee',
-                            500: '#00b4d8',
+                            800: '#0043a8',
+                            900: '#00378a',
+                            cyan: '#00b4ff',
                         }
                     }
                 }
@@ -80,7 +75,7 @@
                  :class="{
                      'border-blue-100 ring-1 ring-blue-500/10': toast.type === 'success',
                      'border-rose-100 ring-1 ring-rose-500/10': toast.type === 'error',
-                     'border-slate-200 ring-1 ring-slate-400/10': toast.type === 'info'
+                     'border-slate-200 ring-1 ring-slate-500/10': toast.type === 'info'
                  }">
                 <div class="p-2.5 rounded-xl flex-shrink-0"
                      :class="{
@@ -114,22 +109,16 @@
         </div>
 
         <!-- Navbar -->
-        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
-                    <div class="flex items-center space-x-3">
-                        <!-- Official Spinotek Brand Logo -->
-                        <div class="w-10 h-10 rounded-xl bg-white border border-slate-200/80 p-1.5 flex items-center justify-center shadow-xs flex-shrink-0">
-                            <svg class="w-full h-full" viewBox="0 0 380 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5 0C20.37 0 0 20.37 0 45.5C0 57.5 4.8 68.3 12.6 76.1L12.7 76.2L12.8 76.3C20.6 84.1 31.4 88.9 43.4 88.9C45.3 88.9 47.1 88.7 49 88.5L108.6 158.4L29 237.9C10.7 256.2 0 280.9 0 307.2C0 314.1 1.2 320 3.6 320H170.8C189.1 320 206.5 312.8 219.5 299.8L351.4 167.9C369.7 149.6 380 124.9 380 98.6C380 44.1 335.9 0 281.4 0H45.5Z" fill="#00b4d8" />
-                                <path d="M45.5 0C20.37 0 0 20.37 0 45.5C0 57.5 4.8 68.3 12.6 76.1L108.6 172.1L275.5 5.2C277.5 3.2 279.4 1.5 281.4 0H45.5Z" fill="#38bdf8" />
-                                <path d="M281.4 0C255.1 0 230.4 10.3 212.1 28.6L29 211.7C10.7 230 0 254.7 0 281C0 302.6 10.7 320 28 320H150L351.4 118.6C369.7 100.3 380 75.6 380 49.3C380 22.1 357.9 0 330.7 0H281.4Z" fill="#0066FF" />
-                            </svg>
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center p-1.5 shadow-sm flex-shrink-0">
+                            <img src="{{ route('task-monitoring.logo') }}" alt="Spinotek Logo" class="w-full h-full object-contain">
                         </div>
                         <div>
-                            <button @click="switchTab('tasks')" class="font-bold text-lg text-slate-800 tracking-tight hover:text-blue-600 transition flex items-center gap-2 cursor-pointer">
-                                <span>Spinotek</span>
-                                <span class="text-blue-700 font-semibold text-xs px-2 py-0.5 bg-blue-50 rounded-md border border-blue-200">Dev Monitor</span>
+                            <button @click="switchTab('tasks')" class="font-bold text-lg text-slate-900 tracking-tight hover:text-blue-600 transition flex items-center gap-2 cursor-pointer">
+                                Spinotek <span class="text-blue-600 font-semibold text-xs px-2 py-0.5 bg-blue-50 rounded-md border border-blue-200">Monitoring</span>
                             </button>
                         </div>
                     </div>
@@ -138,7 +127,7 @@
                     <nav class="flex items-center space-x-2">
                         <button @click="switchTab('tasks')"
                                 class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer"
-                                :class="activeTab === 'tasks' ? 'bg-blue-50 text-blue-700 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
+                                :class="activeTab === 'tasks' ? 'bg-blue-50 text-blue-600 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
@@ -146,7 +135,7 @@
                         </button>
                         <button @click="switchTab('version-logs')"
                                 class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium transition cursor-pointer"
-                                :class="activeTab === 'version-logs' ? 'bg-blue-50 text-blue-700 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
+                                :class="activeTab === 'version-logs' ? 'bg-blue-50 text-blue-600 border border-blue-200 font-semibold shadow-2xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.386l5.06-2.981c.827-.486 1.055-1.547.494-2.296L11.16 4.591A2.25 2.25 0 009.568 3z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
@@ -182,7 +171,7 @@
                     <!-- Stats Cards -->
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         <!-- Total Task -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Task</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -195,7 +184,7 @@
                         </div>
 
                         <!-- Pending -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Pending</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -208,7 +197,7 @@
                         </div>
 
                         <!-- In Progress -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">In Progress</span>
                                 <span class="p-2 bg-amber-50 text-amber-600 rounded-xl">
@@ -221,7 +210,7 @@
                         </div>
 
                         <!-- Completed -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Completed</span>
                                 <span class="p-2 bg-blue-50 text-blue-600 rounded-xl">
@@ -235,7 +224,7 @@
                     </div>
 
                     <!-- Filters & Search (Instant Reactive) -->
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs">
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-center">
                             <!-- Search -->
                             <div class="relative">
@@ -283,7 +272,7 @@
                     </div>
 
                     <!-- Tasks Table -->
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-sm text-slate-700">
                                 <thead class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-500 tracking-wider">
@@ -394,7 +383,7 @@
                     <!-- Summary Stats Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <!-- Total Rilis -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Versi</span>
                                 <span class="p-2 bg-slate-100 text-slate-600 rounded-xl">
@@ -408,7 +397,7 @@
                         </div>
 
                         <!-- Versi Terbaru -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Versi Terbaru</span>
                                 <span class="p-2 bg-blue-50 text-blue-600 rounded-xl">
@@ -421,7 +410,7 @@
                         </div>
 
                         <!-- Terakhir Diperbarui -->
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Terakhir Dirilis</span>
                                 <span class="p-2 bg-sky-50 text-sky-600 rounded-xl">
@@ -439,10 +428,10 @@
                         <div v-for="(log, index) in versionLogs" :key="index" class="relative pl-6 sm:pl-8">
                             <!-- Dot icon -->
                             <div class="absolute -left-[9px] top-4 w-4 h-4 rounded-full bg-white border-4"
-                                 :class="index === 0 ? 'border-blue-600 ring-4 ring-blue-100' : 'border-slate-400'"></div>
+                                 :class="index === 0 ? 'border-blue-500 ring-4 ring-blue-100' : 'border-slate-400'"></div>
 
                             <!-- Version Card -->
-                            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 sm:p-6 hover:shadow-md transition">
+                            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:shadow-md transition">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
                                     <div class="flex items-center gap-3">
                                         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 font-mono tracking-tight">@{{ log.version }}</h2>
@@ -545,7 +534,7 @@
                         <button type="button" @click="showCreateModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm shadow-blue-200 cursor-pointer">
                             <span v-if="isSubmitting">Menyimpan...</span>
                             <span v-else>Simpan Task</span>
                         </button>
@@ -601,7 +590,7 @@
                         <button type="button" @click="showEditModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm shadow-blue-200 cursor-pointer">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
@@ -688,7 +677,7 @@
                         <button type="button" @click="showAddVersionModal = false" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold rounded-xl transition cursor-pointer">
                             Batal
                         </button>
-                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm cursor-pointer">
+                        <button type="submit" :disabled="isSubmitting" class="inline-flex items-center gap-1.5 px-5 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition shadow-sm shadow-blue-200 cursor-pointer">
                             <svg class="w-4 h-4 flex-shrink-0" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                             </svg>
@@ -703,7 +692,8 @@
         <!-- Footer -->
         <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
             <div class="flex items-center justify-center gap-2">
-                <span>&copy; {{ date('Y') }} Spinotek Dev Monitor. All rights reserved.</span>
+                <img src="{{ route('task-monitoring.logo') }}" alt="Spinotek Logo" class="w-4 h-4 object-contain">
+                <p>&copy; {{ date('Y') }} Spinotek Dev Monitor Plugin. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -860,7 +850,7 @@
                 const getVersionTypeBadgeClass = (type) => {
                     switch((type || '').toLowerCase()) {
                         case 'release':
-                            return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+                            return 'bg-purple-50 text-purple-700 border-purple-200';
                         case 'fix':
                             return 'bg-rose-50 text-rose-700 border-rose-200';
                         case 'improvement':
