@@ -446,7 +446,7 @@
                                             </svg>
                                             @{{ log.date || '-' }}
                                         </span>
-                                        <span>&bull;</span>
+                                        <span class="w-1 h-1 rounded-full bg-slate-300 flex-shrink-0"></span>
                                         <span class="inline-flex items-center gap-1.5 font-medium text-slate-700">
                                             <svg class="w-4 h-4 flex-shrink-0 text-slate-400" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -492,7 +492,11 @@
             <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 transform transition-all animate-toast-in">
                 <div class="flex justify-between items-center pb-4 border-b border-slate-100">
                     <h3 class="text-lg font-bold text-slate-900">Tambah Task Baru</h3>
-                    <button @click="showCreateModal = false" class="text-slate-400 hover:text-slate-600 text-xl font-bold leading-none cursor-pointer">&times;</button>
+                    <button @click="showCreateModal = false" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition cursor-pointer" title="Tutup">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
                 <form @submit.prevent="submitCreateTask" class="mt-4 space-y-4">
@@ -548,7 +552,11 @@
             <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 transform transition-all animate-toast-in">
                 <div class="flex justify-between items-center pb-4 border-b border-slate-100">
                     <h3 class="text-lg font-bold text-slate-900">Edit Task #@{{ editingTask.id }}</h3>
-                    <button @click="showEditModal = false" class="text-slate-400 hover:text-slate-600 text-xl font-bold leading-none cursor-pointer">&times;</button>
+                    <button @click="showEditModal = false" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition cursor-pointer" title="Tutup">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
                 <form @submit.prevent="submitUpdateTask" class="mt-4 space-y-4">
@@ -637,7 +645,11 @@
             <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 transform transition-all animate-toast-in">
                 <div class="flex justify-between items-center pb-4 border-b border-slate-100">
                     <h3 class="text-lg font-bold text-slate-900">Catat Versi Baru</h3>
-                    <button @click="showAddVersionModal = false" class="text-slate-400 hover:text-slate-600 text-xl font-bold leading-none cursor-pointer">&times;</button>
+                    <button @click="showAddVersionModal = false" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition cursor-pointer" title="Tutup">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
                 <form @submit.prevent="submitAddVersion" class="mt-4 space-y-4">
